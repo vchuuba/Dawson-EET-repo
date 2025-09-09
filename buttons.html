@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The web site of vchuuba</title>
+    <link href="style.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/x-icon" href="img/deltarune.png">
+    <script>
+      function changeParagraph() {
+        document.getElementById("button3").innerHTML = "Chamborampo!";
+        document.getElementById("demo").innerHTML = "Mamborampa!";
+      }
+      function fade() {
+        var x = document.getElementById("button2");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      } 
+      function imageChange() {
+        document.getElementById("tanya").src = "img/dancingbanana.gif"
+      }
+      function changeParagraph2(elem) {
+        elem.innerHTML = "You get the dancing banana.";
+      }
+      function formBlur(elem) {
+        elem.placeholder = "This field is required.";
+      }
+
+    </script>
+
+  </head>
+  <body>
+
+    <button onclick="alert('Boo!')" class="button">
+      <div class="blob1"></div>
+      <div class="blob2"></div>
+      <div class="inner">*rustling sounds*</div>
+    </button>
+
+    <button class="button2" data-text="Awesome" id="button2" onclick="fade()">
+      <span class="actual-text">&nbsp;Disappearing&nbsp;button&nbsp;</span>
+      <span aria-hidden="true" class="hover-text">&nbsp;Disappearing&nbsp;button&nbsp;</span>
+    </button>
+
+    <p></p>
+
+    <button id="button3" onclick="changeParagraph()">
+      Papachampo?♦
+    </button>♦
+♦
+    <p id="demo" class="demo">Wampachoko.</p>♦
+♦
+    <p></p>♦
+
+    <button id="button4" onclick="changeParagraph2(this)">
+      What happens when you click tanya?
+    </button>
+
+    <br>
+
+    <img src="img/tanya.png" id="tanya" onclick="imageChange()">
+
+    <p></p>
+
+    <form action="idc.html">
+      <label for="testform">testform</label><br>
+      <input type="text" id="testform" name="testform" pattern="[A-Za-z]{20}" title="Latin alphabet only."  placeholder="Joesopher" onblur="formBlur(this)"><br>
+      <input type="submit" value="Submit">
+    </form>
+
+    <p><a href="index.html">Go back.</a> &lt;- Main area.</p>
+  </body>
+</html>
