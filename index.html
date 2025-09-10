@@ -6,6 +6,12 @@
     <title>The web site of vchuuba</title>
     <link href="style.css" rel="stylesheet" type="text/css" media="all">
     <link rel="icon" type="image/x-icon" href="img/deltarune.png">
+    <script>
+      fetch("text.txt")
+      .then(x => x.text())
+      .then(y =>
+      document.getElementByID("textfile").innerHTML = y);
+    <script>
   </head>
   <body>
     <h1>Welcome to my Website!</h1>
@@ -30,5 +36,10 @@
     <p><a href="forms.html">Go to forms page.</a> &lt;- Serious area.</p>
 
     <p><a href="buttons.html">Go to buttons page.</a> &lt;- Fun area.</p>
+
+    <button id="textfile" onclick="fetch(this)">
+      Fetch test.
+    </button>
+
   </body>
 </html>
