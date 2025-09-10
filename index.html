@@ -7,10 +7,13 @@
     <link href="style.css" rel="stylesheet" type="text/css" media="all">
     <link rel="icon" type="image/x-icon" href="img/deltarune.png">
     <script>
-      fetch("text.txt")
-      .then(x => x.text())
-      .then(y =>
-      document.getElementByID("textfile").innerHTML = y);
+      let file = "text.txt"
+
+      function getText() {
+        fetch (file)
+        .then(x => x.text())
+        .then(y => document.getElementById("textfile").innerHTML = y);
+      }
     </script>
   </head>
   <body>
@@ -24,22 +27,24 @@
     <img src="img/volkov.jpg" alt="Soviet Hero from Mental Omega">
 
     <div>
-        <p>Here's how to make a list:</p>
+      <p>Here's how to make a list:</p>
 
-        <ul>
+      <ul>
         <li>First thing</li>
         <li>Second thing</li>
         <li>Third thing</li>
-        </ul>
+      </ul>
     </div>
 
     <p><a href="forms.html">Go to forms page.</a> &lt;- Serious area.</p>
 
     <p><a href="buttons.html">Go to buttons page.</a> &lt;- Fun area.</p>
 
-    <button id="textfile" onclick="fetch(this)">
+    <button onclick="getText()">
       Fetch test.
     </button>
+
+    <p id="textfile">Unfetched text.</p>
 
   </body>
 </html>
