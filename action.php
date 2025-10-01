@@ -4,6 +4,7 @@
         <title>Form response</title>
     </head>
     <body>
-        <p><?= var_dump($_SERVER) ?></p>
+        <?php echo $_SERVER['HTTP_USER_AGENT'] ?>
+
     </body>
 </html>
