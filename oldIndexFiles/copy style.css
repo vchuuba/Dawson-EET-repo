@@ -1,0 +1,225 @@
+/*
+========================================
+CSS Custom Properties (Brutalist Theme)
+========================================
+The theme is defined by high contrast, a raw monospace font,
+a single accent color, and a thick border style.
+*/
+:root {
+    --color-background: #ffffff;
+    --color-foreground: #000000;
+    --color-accent: #ffff00;   /* A classic, vibrant web yellow */
+
+    /* --font-family-mono: 'SF Mono', 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+    --font-weight-bold: 700; */
+    
+    --border-width: 3px;
+    --border-style: var(--border-width) solid var(--color-foreground);
+
+    --navbar-height: 80px;
+    --navbar-padding: 1rem;
+    --container-width: 1140px;
+    --transition-speed: 0.15s;
+}
+
+/*
+========================================
+Global Resets & Brutalist Base Styles
+========================================
+*/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    border-radius: 0; /* A core tenet of this style: no rounded corners. */
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-family-mono);
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--color-foreground);
+    background-color: var(--color-background);
+    /* Set the colors explicitly for a true inversion effect later */
+}
+
+/* Add some placeholder content */
+body::after {
+    content: 'Scroll down. This is a standard navbar. Note the hard borders and lack of shadows, which are characteristic of brutalist web design.';
+    display: block;
+    text-align: center;
+    height: 200vh;
+    padding-top: 5rem;
+    color: #78757a;
+}
+
+ul { list-style: none; margin: 0; padding: 0; }
+a { text-decoration: none; color: inherit; } /* Links inherit color */
+
+/*
+========================================
+Main Navbar Structure
+========================================
+*/
+.navbar {
+    height: var(--navbar-height);
+    display: flex;
+    align-items: center;
+    border-bottom: var(--border-style);
+    background-color: var(--color-background); /* Explicitly set for hover effects */
+}
+
+.navbar__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--navbar-padding);
+}
+
+.navbar__brand {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    padding: 0.5rem;
+    border: var(--border-style);
+    color: var(--color-foreground);
+}
+
+/*
+========================================
+Mobile Menu & Hamburger Toggle
+========================================
+*/
+.navbar__toggle {
+    padding: 0.5rem;
+    border: var(--border-style);
+    background: transparent;
+    cursor: pointer;
+    z-index: 1001; 
+}
+
+.navbar__toggle .bar {
+    display: block;
+    width: 25px;
+    height: var(--border-width); /* Match border thickness */
+    margin: 5px auto;
+    background-color: var(--color-foreground);
+    transition: all var(--transition-speed) ease-in-out;
+}
+
+/* 'X' animation */
+.navbar__toggle.is-active .bar:nth-child(2) { opacity: 0; }
+.navbar__toggle.is-active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.navbar__toggle.is-active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+.navbar__menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: calc(var(--navbar-height) + var(--border-width));
+    left: 0;
+    background-color: var(--color-background);
+    border-bottom: var(--border-style);
+    z-index: 1000;
+}
+
+.navbar__menu.is-active { display: flex; }
+
+.navbar__item {
+    text-align: center;
+    border-top: var(--border-style); /* Create harsh separators */
+}
+
+.navbar__link {
+    display: block;
+    padding: 1.5rem;
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+/* On mobile, invert the colors for a stark hover effect */
+.navbar__link:hover,
+.navbar__link:focus {
+    background-color: var(--color-foreground);
+    color: var(--color-background);
+}
+
+.navbar__link--cta {
+        /* In mobile, CTA is styled like other links but hover uses accent color */
+}
+
+.navbar__link--cta:hover,
+.navbar__link--cta:focus {
+    background-color: var(--color-accent);
+    color: var(--color-foreground);
+}
+
+/* A highly visible focus ring that fits the brutalist theme */
+:is(.navbar__toggle, .navbar__link):focus-visible {
+    outline: var(--border-width) solid var(--color-accent);
+    outline-offset: 3px;
+}
+
+/*
+========================================
+Desktop Navbar Styles (Responsive)
+========================================
+*/
+@media (min-width: 768px) {
+    .navbar__toggle {
+        display: none;
+    }
+
+    .navbar__menu {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch; /* Make items full height */
+        position: static;
+        width: auto;
+        background-color: transparent;
+        border: none;
+    }
+
+    .navbar__list {
+        display: flex;
+        align-items: stretch; /* Make items full height */
+    }
+
+    .navbar__item {
+        border-top: none;
+        border-left: var(--border-style);
+    }
+
+    .navbar__link {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        padding: 0 1.5rem;
+    }
+
+    /* Main link hover effect: color inversion */
+    .navbar__link:not(.navbar__link--cta):hover,
+    .navbar__link:not(.navbar__link--cta):focus {
+        background-color: var(--color-foreground);
+        color: var(--color-background);
+    }
+    
+    /* CTA Button Styling for Desktop */
+    .navbar__link--cta {
+        background-color: var(--color-accent);
+        color: var(--color-foreground);
+    }
+    
+    /* CTA hover effect: black background with yellow text */
+    .navbar__link--cta:hover,
+    .navbar__link--cta:focus {
+        background-color: var(--color-foreground);
+        color: var(--color-accent);
+    }
+}

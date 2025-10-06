@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The web site of vchuuba</title>
+    <link href="jokeStyle.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/x-icon" href="img/deltarune.png">
+    <script>
+      let file = "text.txt"
+
+      function getText() {
+        fetch (file)
+        .then(x => x.text())
+        .then(y => document.getElementById("textfile").innerHTML = y);
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Welcome to my Website!</h1>
+
+    <h2>I'm not adding anything yet, just want to mess around.</h2>
+
+    <p>Here's how you can make <strong>bold</strong> and <em>italic</em> text.</p>
+
+    <p>Here's how you can add an image:</p>
+    <img src="img/volkov.jpg" alt="Soviet Hero from Mental Omega">
+
+    <div>
+      <p>Here's how to make a list:</p>
+
+      <ul>
+        <li>First thing</li>
+        <li>Second thing</li>
+        <li>Third thing</li>
+      </ul>
+    </div>
+
+    <p><a href="forms.html">Go to forms page.</a> &lt;- Serious area.</p>
+
+    <p><a href="buttons.html">Go to buttons page.</a> &lt;- Fun area.</p>
+
+    <button onclick="getText()">
+      Fetch test.
+    </button>
+
+    <p id="textfile">Unfetched text.</p>
+
+  </body>
+</html>

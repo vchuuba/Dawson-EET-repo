@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The web site of vchuuba</title>
+    <link href="style.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/x-icon" href="img/deltarune.png">
+    <script>
+      let file = "text.txt"
+
+      function getText() {
+        fetch (file)
+        .then(x => x.text())
+        .then(y => document.getElementById("textfile").innerHTML = y);
+      }
+    </script>
+  </head>
+  <body>
+    <header class="navbar" role="banner">
+        <div class="navbar__container">
+            <a href="#" class="navbar__brand" aria-label="Homepage">Brand</a>
+            
+            <button class="navbar__toggle" 
+                    id="navbarToggle" 
+                    aria-label="Toggle navigation" 
+                    aria-controls="navbarMenu" 
+                    aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            
+            <nav id="navbarMenu" class="navbar__menu" role="navigation" aria-labelledby="navbarToggle">
+                <ul class="navbar__list">
+                    <li class="navbar__item"><a href="#" class="navbar__link">Allies</a></li>
+                    <li class="navbar__item"><a href="#" class="navbar__link">Soviet</a></li>
+                    <li class="navbar__item"><a href="#" class="navbar__link">Yuri</a></li>
+                    <li class="navbar__item"><a href="#" class="navbar__link">Contact</a></li>
+                    <li class="navbar__item navbar__item--cta">
+                        <a href="#" class="navbar__link navbar__link--cta">Experimental pages</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="content">
+      <img src="img/volkov.jpg" alt="Soviet Hero from Mental Omega">
+      <p><a href="forms.html">Go to forms page.</a> &lt;- Serious area.</p>
+      <p><a href="buttons.html">Go to buttons page.</a> &lt;- Fun area.</p>
+      <button onclick="getText()">
+        Fetch test.
+      </button>
+      <p id="textfile">Unfetched text.</p>
+    </main>
+
+    <script>
+      // A small, accessible script to toggle the mobile menu.
+      document.addEventListener('DOMContentLoaded', function () {
+        const navbarToggle = document.getElementById('navbarToggle');
+        const navbarMenu = document.getElementById('navbarMenu');
+
+        if (navbarToggle && navbarMenu) {
+          navbarToggle.addEventListener('click', function () {
+            navbarToggle.classList.toggle('is-active');
+            navbarMenu.classList.toggle('is-active');
+            const isExpanded = navbarToggle.getAttribute('aria-expanded') === 'true';
+            navbarToggle.setAttribute('aria-expanded', !isExpanded);
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

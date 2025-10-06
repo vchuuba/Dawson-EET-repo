@@ -1,118 +1,103 @@
-body {
-  background-image: url("img/starpattern2.jpg");
-  color: white;
+:root {
+    --color-background: #eae1f0;
+    --color-surface: #f8f9fa;
+    --color-text-primary: #212529;
+    --color-text-secondary: #495057;
+    --color-primary: #0d6efd;
+    --color-border: #e9ecef;
+    --font-family-sans-serif: "Segoe UI", -apple-system, sans-serif;
+    --navbar-height: 80px;
+    --container-width: 1200px;
+    --border-radius: 8px;
+    --transition-speed: 0.3s;
 }
 
-.demo {
-  display: inline;
-  font-family:'Courier New', Courier, monospace;
+    #center {
+        text-align: center;
+    }
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; font-family: var(--font-family-sans-serif); background-color: #f9fafb; line-height: 1.6; }
+.content { min-height: 150vh; max-width: var(--container-width); margin: 0 auto; padding: calc(var(--navbar-height) + 2rem) 1.5rem; }
+ul { list-style: none; margin: 0; padding: 0; }
+a, .mega-menu-toggle { text-decoration: none; color: var(--color-text-secondary); background: none; border: none; font-family: inherit; cursor: pointer; }
+a:hover, .mega-menu-toggle:hover { color: var(--color-primary); }
+
+.navbar { position: sticky; top: 0; z-index: 1001; height: var(--navbar-height); display: flex; align-items: center; background-color: var(--color-background); border-bottom: 1px solid var(--color-border); }
+.navbar__container { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: var(--container-width); margin: 0 auto; padding: 0 1.5rem; }
+.navbar__brand { font-size: 1.5rem; font-weight: 600; color: var(--color-text-primary); }
+
+.nav-item { position: relative; }
+.nav-link, .mega-menu-toggle { display: flex; align-items: center; gap: .5rem; padding: 1rem 1.5rem; font-weight: 500; font-size: 1rem; color: var(--color-text-primary); }
+
+.mega-menu { display: none; }
+.nav-item.is-open > .mega-menu { display: block; }
+
+/*
+========================================
+MOBILE-FIRST STYLES (DEFAULT)
+========================================
+*/
+
+/* The main navigation container (mobile menu panel) */
+.navbar__nav {
+    display: none; /* Hidden by default */
+    position: fixed; top: var(--navbar-height); left: 0; width: 100%;
+    background-color: var(--color-background);
+    height: calc(100vh - var(--navbar-height)); overflow-y: auto;
+}
+.navbar__nav.is-open { display: block; } /* Show when toggled */
+
+.nav-list > .nav-item { border-bottom: 1px solid var(--color-border); }
+.nav-link, .mega-menu-toggle { justify-content: space-between; width: 100%; }
+
+/* Sub-menu panel (accordion style) */
+.mega-menu {
+    max-height: 0; overflow: hidden; background-color: var(--color-surface);
+    transition: max-height var(--transition-speed) ease;
+}
+.nav-item.is-open > .mega-menu { max-height: 1000px; /* Animate to open */ }
+.mega-menu__content { padding: 1rem 1.5rem; }
+
+/* Sub-menu grid (stacks vertically) */
+.mega-menu__grid { display: block; }
+.mega-menu__column:not(:first-child) { margin-top: 1.5rem; }
+.mega-menu__heading { font-size: .9rem; font-weight: 600; text-transform: uppercase; margin: 0 0 1rem; }
+.mega-menu__link-list li { margin-bottom: 0.75rem; }
+
+/* The hamburger button */
+.navbar__mobile-toggle { display: block; border: 1px solid var(--color-border); background: transparent; padding: 0.5rem; cursor: pointer; }
+
+/*
+========================================
+DESKTOP OVERRIDES
+========================================
+*/
+@media (min-width: 992px) {
+    .navbar__mobile-toggle { display: none; } /* Hide hamburger */
+
+    /* Restore nav to a horizontal layout */
+    .navbar__nav {
+        display: flex; position: static; height: auto; width: auto;
+        background-color: transparent; overflow: visible;
+    }
+    .nav-list { display: flex; align-items: center; gap: .5rem; }
+    .nav-list > .nav-item { border-bottom: none; }
+    .nav-link, .mega-menu-toggle {
+        padding: .75rem 1rem; border-radius: var(--border-radius);
+        transition: background-color 0.2s, color 0.2s;
+    }
+    .nav-link:hover, .mega-menu-toggle:hover { background-color: var(--color-surface); }
+    
+    /* Restore desktop mega menu styles */
+    .mega-menu {
+        position: absolute; top: calc(100% + 5px); left: 0;
+        width: 500px; background: var(--color-background);
+        border: 1px solid var(--color-border); border-radius: var(--border-radius);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        max-height: none; /* Remove accordion behavior */
+    }
+    .mega-menu__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .mega-menu__column:not(:first-child) { margin-top: 0; }
 }
 
-
-/* From Uiverse.io by Spacious74 */ 
-.button {
-  cursor: pointer;
-  font-size: 1.4rem;
-  border-radius: 16px;
-  border: none;
-  padding: 2px;
-  background: radial-gradient(circle 80px at 80% -10%, #ffffff, #181b1b);
-  position: relative;
-}
-.button::after {
-  content: "";
-  position: absolute;
-  width: 65%;
-  height: 60%;
-  border-radius: 120px;
-  top: 0;
-  right: 0;
-  box-shadow: 0 0 20px #ffffff38;
-  z-index: -1;
-}
-
-.blob1 {
-  position: absolute;
-  width: 70px;
-  height: 100%;
-  border-radius: 16px;
-  bottom: 0;
-  left: 0;
-  background: radial-gradient(
-    circle 60px at 0% 100%,
-    #3fe9ff,
-    #0000ff80,
-    transparent
-  );
-  box-shadow: -10px 10px 30px #0051ff2d;
-}
-
-.inner {
-  padding: 14px 25px;
-  border-radius: 14px;
-  color: #fff;
-  z-index: 3;
-  position: relative;
-  background: radial-gradient(circle 80px at 80% -50%, #777777, #0f1111);
-}
-.inner::before {
-  content: "";
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  border-radius: 14px;
-  background: radial-gradient(
-    circle 60px at 0% 100%,
-    #00e1ff1a,
-    #0000ff11,
-    transparent
-  );
-  position: absolute;
-}
-
-
-/* From Uiverse.io by satyamchaudharydev */ 
-/* === removing default button style ===*/
-.button2 {
-  margin: 0;
-  height: auto;
-  background: transparent;
-  padding: 0;
-  border: none;
-  cursor: pointer;
-}
-
-/* button styling */
-.button2 {
-  --border-right: 6px;
-  --text-stroke-color: rgba(255,255,255,0.6);
-  --animation-color: #37FF8B;
-  --fs-size: 2em;
-  letter-spacing: 3px;
-  text-decoration: none;
-  font-size: var(--fs-size);
-  font-family: "Arial";
-  position: relative;
-  text-transform: uppercase;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--text-stroke-color);
-}
-/* this is the text, when you hover on button */
-.hover-text {
-  position: absolute;
-  box-sizing: border-box;
-  content: attr(data-text);
-  color: var(--animation-color);
-  width: 0%;
-  inset: 0;
-  border-right: var(--border-right) solid var(--animation-color);
-  overflow: hidden;
-  transition: 0.5s;
-  -webkit-text-stroke: 1px var(--animation-color);
-}
-/* hover */
-.button2:hover .hover-text {
-  width: 100%;
-  filter: drop-shadow(0 0 23px var(--animation-color))
-}
