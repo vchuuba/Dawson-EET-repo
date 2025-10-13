@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The web site of vchuuba</title>
-    <link href="../style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="../oldIndexFiles/jokeStyle.css" rel="stylesheet" type="text/css" media="all">
     <link rel="icon" type="image/x-icon" href="../img/deltarune.png">
     <script>
       function changeParagraph() {
@@ -20,7 +20,7 @@
         }
       } 
       function imageChange() {
-        document.getElementById("tanya").src = "img/dancingbanana.gif"
+        document.getElementById("tanya").src = "../img/dancingbanana.gif"
       }
       function changeParagraph2(elem) {
         elem.innerHTML = "You get the dancing banana.";
@@ -29,6 +29,13 @@
         elem.placeholder = "This field is required.";
       }
 
+      let file = "text.txt"
+
+      function getText() {
+        fetch (file)
+        .then(x => x.text())
+        .then(y => document.getElementById("textfile").innerHTML = y);
+      }
     </script>
 
   </head>
@@ -65,9 +72,14 @@
 
     <p></p>
 
+        <button onclick="getText()">
+            Fetch test.
+        </button>
+        <p id="textfile">Unfetched text.</p>
+
     <form action="idc.html">
       <label for="testform">testform</label><br>
-      <input type="text" id="testform" name="testform" pattern="[A-Za-z]{20}" title="Latin alphabet only."  placeholder="Joesopher" onblur="formBlur(this)"><br>
+      <input type="text" id="testform" name="testform" pattern="[A-Za-z]{2,20}" title="Latin alphabet only."  placeholder="Joesopher" onblur="formBlur(this)"><br>
       <input type="submit" value="Submit">
     </form>
 
