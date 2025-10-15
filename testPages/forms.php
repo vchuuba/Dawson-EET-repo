@@ -9,6 +9,7 @@
         <p>Hello, your name is <?= $_POST['fname'] ?> <?= $_POST['lname'] ?>. Your favorite language is <?= $_POST['fav_language'] ?>.</p>
 
         <p>
+            Can this paragraph block even output text
         <?php=
         $servername = "thelichking"; // keep $servername to localhost if doing it on own Pi
         $username = "Arthas";
