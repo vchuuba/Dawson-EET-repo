@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Epsilon units</title>
+        <link href="../style.css" rel="stylesheet" type="text/css" media="all">
+        <link rel="icon" type="image/x-icon" href="../img/logo/logofoehnrevolt.png"">
+        <!-- <script>
+        </script> -->
+    </head>
+    <body>
+        <header class="navbar">
+            <div class="navbar__container">
+                <a href="https://mentalomega.com/" class="navbar__brand">Play Mental Omega!</a>
+                <button class="navbar__mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="main-nav">&#x2630;</button>
+                <nav class="navbar__nav" id="main-nav">
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                        <li class="nav-item" data-menu>
+                            <button class="mega-menu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="products-menu">Explore here &#x25BE;</button>
+                            <div class="mega-menu" id="products-menu">
+                                <div class="mega-menu__content">
+                                    <div class="mega-menu__grid">
+                                        <div class="mega-menu__column">
+                                            <h3 class="mega-menu__heading">The Factions</h3>
+                                            <ul class="mega-menu__link-list">
+                                                <li><a href="allies.html">Allies</a></li><li><a href="soviet.html">Soviet</a></li><li><a href="epsilon.html">Yuri</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="mega-menu__column">
+                                            <h3 class="mega-menu__heading">Testing pages</h3>
+                                            <ul class="mega-menu__link-list">
+                                                <li><a href="../testPages/forms.html">Forms</a></li><li><a href="../testPages/buttons.html">Buttons</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item" data-menu>
+                            <button class="mega-menu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="contact-menu">What is this site? &#x25BE;</button>
+                            <div class="mega-menu" id="contact-menu">
+                                <div class="mega-menu__content"><h3 class="mega-menu__heading">WebDev practice for the EET program at Dawson College</h3><p>This site is meant to be an experimental site where I mess around to see what works and what doesn't in both front and back end environments. None of this is intended to be a truly functional website.</p></div>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <img id="volkovHello" src="../img/volkov.jpg" alt="Soviet Hero from Mental Omega">
+        <p>Volkov owns this page now.</p>
+
+        <script>
+                //////////////
+                // menu bar //
+                //////////////      
+            document.addEventListener('DOMContentLoaded', () => {
+                const mobileToggle = document.getElementById('mobile-toggle');
+                const mainNav = document.getElementById('main-nav');
+                
+                // --- 1. Mobile Hamburger Toggle ---
+                mobileToggle.addEventListener('click', () => {
+                    const isOpen = mainNav.classList.toggle('is-open');
+                    mobileToggle.setAttribute('aria-expanded', isOpen);
+                });
+
+                // --- 2. Mega Menu Logic (for both views) ---
+                const allMenuContainers = document.querySelectorAll('[data-menu]');
+
+                allMenuContainers.forEach(container => {
+                    const toggleButton = container.querySelector('.mega-menu-toggle');
+                    const menuPanel = container.querySelector('.mega-menu');
+                    if (!toggleButton || !menuPanel) return;
+
+                    // This repositions the menu ONLY if it will overflow the screen on desktop
+                    function positionMenu() {
+                        if (window.innerWidth < 992) return; // Only run on desktop
+                        menuPanel.style.left = '0'; // Reset first
+                        const menuRect = menuPanel.getBoundingClientRect();
+                        const viewportWidth = window.innerWidth;
+                        const overflowAmount = menuRect.right - viewportWidth;
+                        if (overflowAmount > 0) {
+                            menuPanel.style.left = `-${overflowAmount + 20}px`;
+                        }
+                    }
+
+                    toggleButton.addEventListener('click', (event) => {
+                        const parentItem = container;
+                        const isExpanded = parentItem.classList.toggle('is-open');
+                        toggleButton.setAttribute('aria-expanded', isExpanded);
+
+                        // Close all other menus
+                        allMenuContainers.forEach(otherContainer => {
+                            if (otherContainer !== container) {
+                                otherContainer.classList.remove('is-open');
+                                otherContainer.querySelector('.mega-menu-toggle').setAttribute('aria-expanded', 'false');
+                            }
+                        });
+
+                    // KEYBOARD NAVIGATION
+                    container.addEventListener('keydown', (e) => {
+                        // Check if we are on a desktop screen
+                        const isDesktopView = window.innerWidth > 992;
+                        const menuItems = Array.from(menuPanel.querySelectorAll('a'));
+
+                        if (isDesktopView) {
+                            // --- DESKTOP KEYBOARD LOGIC ---
+                            const isExpanded = container.getAttribute('aria-expanded') === 'true';
+
+                            // If user presses ArrowDown on the button, open the menu and focus the first item
+                            if (e.target === toggleButton && e.key === 'ArrowDown') {
+                                e.preventDefault();
+                                container.setAttribute('aria-expanded', 'true');
+                                if (menuItems.length > 0) menuItems[0].focus();
+                            }
+
+                            // If user presses ArrowUp or ArrowDown inside an open menu
+                            if (isExpanded && (e.key === 'ArrowUp' || e.key === 'ArrowDown')) {
+                                e.preventDefault();
+                                const activeIndex = menuItems.indexOf(document.activeElement);
+                                let newIndex = e.key === 'ArrowDown' ? activeIndex + 1 : activeIndex - 1;
+
+                                if (newIndex >= menuItems.length) newIndex = 0; // Loop to top
+                                if (newIndex < 0) newIndex = menuItems.length - 1; // Loop to bottom
+                                
+                                menuItems[newIndex].focus();
+                            }
+                        }
+
+                        // --- UNIVERSAL KEYBOARD LOGIC (Applies to both Mobile & Desktop) ---
+
+                        // If user presses Enter or Space on the main toggle button
+                        if (e.target === toggleButton && (e.key === 'Enter' || e.key === 'Space')) {
+                            e.preventDefault();
+                            toggleButton.click(); // Simulate a click to trigger the accordion/flyout
+                        }
+                        
+                        // If user presses Escape, close the menu and return focus to the button
+                        if (e.key === 'Escape') {
+                            container.setAttribute('aria-expanded', 'false');
+                            toggleButton.focus();
+                        }
+                    });        
+
+                        if (isExpanded) positionMenu(); // Position only when opening
+
+                        event.preventDefault(); // Stop links from navigating, as they are just toggles
+                    });
+                });
+                
+                // --- 3. Universal Close Logic ---
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('.navbar')) {
+                        document.querySelectorAll('.nav-item.is-open').forEach(item => {
+                            item.classList.remove('is-open');
+                            item.querySelector('[aria-expanded]').setAttribute('aria-expanded', 'false');
+                        });
+                    }
+                });
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        document.querySelectorAll('.nav-item.is-open').forEach(item => {
+                            item.classList.remove('is-open');
+                            item.querySelector('[aria-expanded]').setAttribute('aria-expanded', 'false');
+                        });
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
