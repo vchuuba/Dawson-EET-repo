@@ -24,26 +24,25 @@
         ?>
 	</p>
 
-	<p>
-	<?php
-        $sql = "select * from unitList;";		// This can be any valid SQL cmd.
-        $result = mysqli_query($conn, $sql);	// Stores rows retrieved by query.
-        echo mysqli_error($conn);	    		// If error, this determines cause.
-	?>
-	</p>
+        <p>
+            <?php
+                $sql = "select * from unitList;";		// This can be any valid SQL cmd.
+                $result = mysqli_query($conn, $sql);	// Stores rows retrieved by query.
+                echo mysqli_error($conn);	    		// If error, this determines cause.
+            ?>
+        </p>
 
-	<p>
-	<?php
-        foreach($result as $row) { 
-        echo nl2br ("\n id: {$row["id"]}
-        | Unit: {$row["unitName"]} 
-        | Faction: {$row["unitFaction"]}
-        | Class: {$row["unitClass"]}\n"); }
-        // This iterates through every each row and echoes only values of defined columns.
-        
-        mysqli_close($conn);
-        ?>
-        
+        <p>
+            <?php
+            foreach($result as $row) { 
+            echo nl2br ("\n id: {$row["id"]}
+            | Unit: {$row["unitName"]} 
+            | Faction: {$row["unitFaction"]}
+            | Class: {$row["unitClass"]}\n"); }
+            // This iterates through every each row and echoes only values of defined columns.
+            
+            mysqli_close($conn);
+            ?>
         </p>
     </body>
 </html>
