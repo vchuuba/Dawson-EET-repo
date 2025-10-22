@@ -9,9 +9,8 @@
         <p>Hello, your name is <?= $_POST['fname'] ?> <?= $_POST['lname'] ?>. Your favorite language is <?= $_POST['fav_language'] ?>.</p>
 
         <p>
-            Can this paragraph block even output text
-        <?php=
-        $servername = "thelichking"; // keep $servername to localhost if doing it on own Pi
+        <?php
+        $servername = "localhost"; // keep $servername to localhost if doing it on own Pi
         $username = "Arthas";
         $password = "Shell111";
         $dbname = "unitStats";
@@ -22,16 +21,24 @@
             die("Connection failed: {mysqli_connect_error()}"); 
         } 
         echo "Connected successfully";
-        
+        ?>
+	</p>
+
+	<p>
+	<?php
         $sql = "select * from unitList;";		// This can be any valid SQL cmd.
         $result = mysqli_query($conn, $sql);	// Stores rows retrieved by query.
         echo mysqli_error($conn);	    		// If error, this determines cause.
+	?>
+	</p>
 
+	<p>
+	<?php
         foreach($result as $row) { 
-        echo "\n id: {$row["id"]}
+        echo nl2br ("\n id: {$row["id"]}
         | Unit: {$row["unitName"]} 
         | Faction: {$row["unitFaction"]}
-        | Class: {$row["unitClass"]}\n"; }
+        | Class: {$row["unitClass"]}\n"); }
         // This iterates through every each row and echoes only values of defined columns.
         
         mysqli_close($conn);
