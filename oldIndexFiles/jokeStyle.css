@@ -2,6 +2,14 @@ body {
   background-image: url("../img/starpattern2.jpg");
 }
 
+p{
+  color:white;
+}
+
+label {
+  color: lime;
+}
+
 .demo {
   display: inline;
   font-family:'Courier New', Courier, monospace;

@@ -29,9 +29,15 @@
 
       <p>What is your name?</p>
       <label for="fname">First name:</label><br>
-      <input type="text" id="fname" name="fname" title="Latin alphabet only." placeholder="Joesopher"><br>
+      <input type="text" id="fname" name="fname" title="Latin alphabet only." pattern="[A-Za-z]{2,20}" placeholder="Joesopher"><br>
       <label for="lname">Last name:</label><br>
-      <input type="text" id="lname" name="lname" title="Latin alphabet only." placeholder="Chungles"> <br><br>
+      <input type="text" id="lname" name="lname" title="Latin alphabet only." pattern="[A-Za-z]{2,20}" placeholder="Chungles"> <br><br>
+
+      <p>Database search test</p>
+      <!-- <label for="unitID">Id of unit:</label><br>
+      <input type="number" id="unitID" name="unitID" title="Number only" pattern="[1-6]{1}" placeholder="Number"><br> -->
+      <label for="unitFaction">Faction of units:</label><br>
+      <input type="text" id="unitFaction" name="unitFaction" title="Latin alphabet only." pattern="[A-Za-z]{1,31}" placeholder="Epsilon"><br>
 
       <input type="submit" value="Submit">
     </form> 
