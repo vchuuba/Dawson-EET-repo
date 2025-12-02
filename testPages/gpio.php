@@ -30,12 +30,6 @@
 
       <p>
         <?php
-          // foreach($result as $row) { 
-          // echo nl2br ("\n id: {$row["id"]}
-          // | Unit: {$row["unitName"]} 
-          // | Faction: {$row["unitFaction"]}
-          // | Class: {$row["unitClass"]}\n"); }
-          // // This iterates through every each row and echoes only values of defined columns.
           $toggle = `gpio toggle 0`;
           $read = `gpio read 0`;
           echo $read;

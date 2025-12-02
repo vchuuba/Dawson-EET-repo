@@ -39,7 +39,7 @@
     </script>
 
   </head>
-  <body>
+  <br>
 
     <button onclick="alert('Boo!')" class="button">
       <div class="blob1"></div>
@@ -75,18 +75,21 @@
       <button onclick="getText()">
           Fetch test.
       </button>
-      <p id="textfile">Unfetched text.</p>
+    <p id="textfile">Unfetched text.</p>
+      
+    </br>
 
-    <form method="POST" action="buttons.php">
+    <form method="POST" action="gpio.php">
       <p>Toggle test</p>
-      <!-- <input type="radio" id="low" name="gpio" value="Low">
-      <label for="low">Low</label><br>
-      <input type="radio" id="high" name="gpio" value="High">
-      <label for="High">High</label><br>
-      <input type="radio" id="toggle" name="gpio" value="Toggle">
-      <label for="Toggle">Toggle</label><br> -->
       <input type="submit" value="Submit">
     </form>
+
+    <form method="POST" action="bme280.php">
+      <p>Sensor test</p>
+      <input type="submit" value="Submit">
+    </form>
+
+    </br>
 
     <form action="idc.html">
       <label for="testform">testform</label><br>
