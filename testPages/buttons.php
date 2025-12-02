@@ -20,7 +20,9 @@
         } 
         echo "Connected successfully";
         
-        `gpio toggle 0`;
+        $toggle = `gpio toggle 0`;
+        $read = `gpio read 0`;
+        echo $read;
                 
         mysqli_close($conn);
 
