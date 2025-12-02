@@ -2,9 +2,9 @@
 <html>
     <head>
         <title>GPIO toggle</title>
-        <script>
+        <!-- <script>
           window.location.replace("buttons.html");
-        </script>
+        </script> -->
     </head>
     <body>
         <?php=
@@ -26,6 +26,7 @@
 
         ?>
 
+        <a href="buttons.html">Go back.</a>
 
     </body>
 </html>
