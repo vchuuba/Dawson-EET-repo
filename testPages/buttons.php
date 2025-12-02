@@ -23,6 +23,7 @@
         $toggle = `gpio toggle 0`;
         $read = `gpio read 0`;
         echo $read;
+        echo "test";
                 
         mysqli_close($conn);
 
