@@ -30,12 +30,9 @@
 
       <p>
         <?php
-          $raw = `./bme280`; // Variable run program. 
-
+          $raw = `/root/raspberry-pi-bme280/bme280`; // Variable run program. 
           echo $raw; // Run and display result to terminal. 
-
           $deserialized = json_decode($raw, true); // Convert to php array and save to variable. 
-
           var_dump($deserialized); // Displays array info. 
           
           mysqli_close($conn);
