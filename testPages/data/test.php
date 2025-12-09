@@ -23,5 +23,7 @@
         </div>
     </div>
 
+    <a href="../buttons.html">Go back.</a>
+
 </body>
 </html>
