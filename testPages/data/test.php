@@ -11,8 +11,9 @@
         p { font-size: 1.1em; }
         strong { display: inline-block; width: 120px; }
     </style>
-    <script src="BM280.js"></script>
+    <script src="script.js"></script>
 </head>
+
 <body>
 
     <div class="container">
