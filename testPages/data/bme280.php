@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>GPIO toggle</title>
-        <!-- <script>
-          window.location.replace("buttons.html");
-        </script> -->
+        <title>humidity sensor</title>
     </head>
     <body>
 
@@ -31,11 +28,11 @@
           $deserialized = json_decode($raw, true); // Convert to php array and save to variable. 
           var_dump($deserialized); // Displays array info. 
           
-          if ($data !== null && is_array($data)) {
+          if ($deserialized !== null && is_array($deserialized)) {
               echo json_encode([
-                  "temperature" => htmlspecialchars($data["temperature"] ?? "N/A"),
-                  "pressure" => htmlspecialchars($data["pressure"] ?? "N/A"),
-                  "altitude" => htmlspecialchars($data["altitude"] ?? "N/A")
+                  "temperature" => htmlspecialchars($deserialized["temperature"] ?? "N/A"),
+                  "pressure" => htmlspecialchars($deserialized["pressure"] ?? "N/A"),
+                  "altitude" => htmlspecialchars($deserialized["altitude"] ?? "N/A")
               ]);
           } else {
               echo json_encode([
