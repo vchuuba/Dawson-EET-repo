@@ -11,7 +11,7 @@ function updateSensorData() {
             html2 = `${data.humidity}`;
             document.getElementById('humidity').innerHTML = html;
             html3 = `${data.altitude}`;
-            document.getElementById('altitude').innerHTML = html;
+            document.getElementById('pressure').innerHTML = html;
         })
 }
 
