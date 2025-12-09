@@ -11,10 +11,10 @@ function updateSensorData() {
             //             </div>`;
             // } else {
                 html = `<div class="data-box">
-                            <h2>Current Sensor Readings</h2>
-                            <p><strong>Temperature:</strong> ${data.temperature} °C</p>
-                            <p><strong>Pressure:</strong> ${data.pressure} hPa</p>
-                            <p><strong>Altitude:</strong> ${data.altitude} m</p>
+                            <h1>Current Sensor Readings</h1>
+                            <p>Temperature: ${data.temperature} °C</p>
+                            <p>Pressure: ${data.pressure} hPa</p>
+                            <p>Altitude: ${data.altitude} m</p>
                         </div>`;
             // }
             document.getElementById('sensor-data').innerHTML = html;
