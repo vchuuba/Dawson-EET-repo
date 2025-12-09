@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>humidity sensor</title>
+
     </head>
     <body>
 
@@ -23,16 +24,16 @@
 
       <p>
         <?php
-          $raw = `/var/www/html/Dawson-EET-repo/testPages/raspberry-pi-bme280/bme280`; // Variable run program. 
+          $raw = `/var/www/html/Dawson-EET-repo/testPages/raspberry-pi-bme280`; // Variable run program. 
           echo $raw; // Run and display result to terminal. 
-          $deserialized = json_decode($raw, true); // Convert to php array and save to variable. 
-          var_dump($deserialized); // Displays array info. 
+          $data = json_decode($raw, true); // Convert to php array and save to variable. 
+          var_dump($data); // Displays array info. 
           
-          if ($deserialized !== null && is_array($deserialized)) {
+          if ($data !== null && is_array($data)) {
               echo json_encode([
-                  "temperature" => htmlspecialchars($deserialized["temperature"] ?? "N/A"),
-                  "pressure" => htmlspecialchars($deserialized["pressure"] ?? "N/A"),
-                  "altitude" => htmlspecialchars($deserialized["altitude"] ?? "N/A")
+                  "temperature" => htmlspecialchars($data["temperature"] ?? "N/A"),
+                  "pressure" => htmlspecialchars($data["pressure"] ?? "N/A"),
+                  "altitude" => htmlspecialchars($data["altitude"] ?? "N/A")
               ]);
           } else {
               echo json_encode([
