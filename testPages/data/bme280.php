@@ -31,6 +31,18 @@
           $deserialized = json_decode($raw, true); // Convert to php array and save to variable. 
           var_dump($deserialized); // Displays array info. 
           
+          if ($data !== null && is_array($data)) {
+              echo json_encode([
+                  "temperature" => htmlspecialchars($data["temperature"] ?? "N/A"),
+                  "pressure" => htmlspecialchars($data["pressure"] ?? "N/A"),
+                  "altitude" => htmlspecialchars($data["altitude"] ?? "N/A")
+              ]);
+          } else {
+              echo json_encode([
+                  "error" => "Failed to read sensor data or decode JSON."
+              ]);
+          }
+
           mysqli_close($conn);
         ?>
       </p>
