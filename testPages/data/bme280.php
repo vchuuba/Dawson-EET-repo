@@ -24,7 +24,7 @@
 
       <p>
         <?php
-          $raw = `/var/www/html/Dawson-EET-repo/testPages/raspberry-pi-bme280`; // Variable run program. 
+          $raw = `/var/www/html/Dawson-EET-repo/testPages/raspberry-pi-bme280/bme280`; // Variable run program. 
           echo $raw; // Run and display result to terminal. 
           $data = json_decode($raw, true); // Convert to php array and save to variable. 
           var_dump($data); // Displays array info. 
