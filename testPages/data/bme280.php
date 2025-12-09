@@ -8,7 +8,8 @@
       echo json_encode([
           "temperature" => htmlspecialchars($data["temperature"] ?? "N/A"),
           "pressure" => htmlspecialchars($data["pressure"] ?? "N/A"),
-          "altitude" => htmlspecialchars($data["altitude"] ?? "N/A")
+          "altitude" => htmlspecialchars($data["altitude"] ?? "N/A"),
+          "humidity" => htmlspecialchars($data["humidity"] ?? "N/A")
       ]);
   } else {
       echo json_encode([
