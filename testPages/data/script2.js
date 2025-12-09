@@ -15,5 +15,5 @@ function updateSensorData() {
         })
 }
 
-setInterval(updateSensorData, 1000);
+setInterval(updateSensorData, 5000);
 window.onload = updateSensorData;
