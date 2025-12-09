@@ -5,23 +5,6 @@
 
     </head>
     <body>
-
-      <p>
-        <?php
-          $servername = "localhost"; // keep $servername to localhost if doing it on own Pi
-          $username = "Arthas";
-          $password = "Shell111";
-          $dbname = "unitStats";
-          // Create connection
-          $conn = mysqli_connect($servername, $username, $password, $dbname);
-          // Check for successful connection
-          if (!$conn) { 
-              die("Connection failed: {mysqli_connect_error()}"); 
-          } 
-          echo "Connected successfully";
-        ?>
-      </p>
-
       <p>
         <?php
           $raw = `/var/www/html/Dawson-EET-repo/testPages/raspberry-pi-bme280/bme280`; // Variable run program. 
@@ -40,8 +23,6 @@
                   "error" => "Failed to read sensor data or decode JSON."
               ]);
           }
-
-          mysqli_close($conn); //upload?
         ?>
       </p>
 
