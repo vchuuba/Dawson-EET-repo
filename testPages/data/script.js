@@ -1,44 +1,38 @@
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('../bme280.php') // Make a GET request to your PHP script
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json(); // Parse the JSON response
+        })
+        .then(data => {
+            const dataContainer = document.getElementById('data-display'); // Get the container element
+            if (data.error) {
+                dataContainer.innerHTML = `<p>Error: ${data.error}</p>`;
+                return;
+            }
 
-var gateway = `ws://${window.location.hostname}/ws`;
-var websocket;
-// Init web socket when the page loads
-window.addEventListener('load', onload);
+            // Example: Display data in an unordered list
+            let htmlContent = '<ul>';
+            data.forEach(item => {
+                htmlContent += `<li>ID: ${item.id}, Name: ${item.name}, Email: ${item.email}</li>`;
+            });
+            htmlContent += '</ul>';
+            dataContainer.innerHTML = htmlContent;
 
-function onload(event) {
-    initWebSocket();
-}
+            // You can also create a table or other elements dynamically
+            // For example, to create a table:
+            // let tableHtml = '<table><thead><tr><th>ID</th><th>Name</th><th>Email</th></tr></thead><tbody>';
+            // data.forEach(item => {
+            //     tableHtml += `<tr><td>${item.id}</td><td>${item.name}</td><td>${item.email}</td></tr>`;
+            // });
+            // tableHtml += '</tbody></table>';
+            // dataContainer.innerHTML = tableHtml;
 
-function getReadings(){
-    websocket.send("getReadings");
-}
-
-function initWebSocket() {
-    console.log('Trying to open a WebSocket connection…');
-    websocket = new WebSocket(gateway);
-    websocket.onopen = onOpen;
-    websocket.onclose = onClose;
-    websocket.onmessage = onMessage;
-}
-
-// When websocket is established, call the getReadings() function
-function onOpen(event) {
-    console.log('Connection opened');
-    getReadings();
-}
-
-function onClose(event) {
-    console.log('Connection closed');
-    setTimeout(initWebSocket, 2000);
-}
-
-// Function that receives the message from the ESP32 with the readings
-function onMessage(event) {
-    console.log(event.data);
-    var myObj = JSON.parse(event.data);
-    var keys = Object.keys(myObj);
-
-    for (var i = 0; i < keys.length; i++){
-        var key = keys[i];
-        document.getElementById(key).innerHTML = myObj[key];
-    }
-}
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            document.getElementById('data-display').innerHTML = `<p>Failed to load data: ${error.message}</p>`;
+        });
+});
